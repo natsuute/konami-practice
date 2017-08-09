@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Konami Code</title>
+</head>
+<body>
+	<pre>kelly&nbsp;<code>[75, 69, 76, 76, 89]</code></pre>
+	<pre>Pressed:&nbsp;<code id="pressed"></code></pre>
+	<hr>
+	<pre>Check:&nbsp;<code id="check"></code></pre>
+
+	<script type="text/javascript">
+
+		var _pressed = [];
+		var _correct = [75, 69, 76, 76, 89];
+		var _pressedText = document.getElementById("pressed");
+		var _checkText = document.getElementById("check");
+
+
+		window.addEventListener("keyup", function(e) {
+
+			_pressed.push(e.keyCode);
+			_pressedText.innerHTML = _pressed;
+			checkKonami2();
+
+		});
+
+
+		function checkKonami() {
+
+			for ( var i = 0; i < _pressed.length; i++ ) {
+				if ( _pressed[i] === _correct[i] ) {
+					if ( _pressed.length === _correct.length ) {
+						_checkText.innerHTML = "All Correct !";
+						_pressed = [];
+					} else {
+						_checkText.innerHTML = ( i + 1 ) + ", Correct !";
+					}
+				} else {
+					_checkText.innerHTML = "Wrong ...";
+					_pressed = [];
+				}
+			}
+
+		}
+
+		// ---------------------------------------------------------
+
+		function checkKonami2() {
+
+			var _lastPress = _pressed.length - 1;
+
+			if ( _pressed[_lastPress] === _correct[_lastPress] ) {
+				if ( _pressed.length === _correct.length ) {
+					_checkText.innerHTML = "All Correct !";
+					_pressed = [];
+				} else {
+					_checkText.innerHTML = _pressed.length + ", Correct !";
+				}
+			} else {
+				_checkText.innerHTML = "Wrong ...";
+				_pressed = [];
+			}
+
+		}
+
+	</script>
+</body>
+</html>

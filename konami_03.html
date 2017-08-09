@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Konami Code</title>
+	<style media="screen">
+		#login {
+			display: none;
+			width: 200px;
+			background: #ccc;
+		}
+		#login.active {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<pre>login&nbsp;<code>[76, 79, 71, 73, 78]</code></pre>
+	<pre>Pressed:&nbsp;<code id="pressed"></code></pre>
+	<hr>
+	<pre>Check:&nbsp;<code id="check"></code></pre>
+
+	<div id="login">
+		<form action="">
+			<input type="text" name="" value=""><br><br>
+			<input type="submit" value="Submit">
+			<input type="reset" value="Reset">
+			<button type="button" id="close">X</button>
+		</form>
+	</div>
+
+	<script type="text/javascript">
+
+		var _pressed = [];
+		var _correct = [76, 79, 71, 73, 78];
+		var _pressedText = document.getElementById("pressed");
+		var _checkText = document.getElementById("check");
+		var _loginBlock = document.getElementById("login");
+
+
+		document.body.addEventListener("keyup", function(e) {
+
+			if ( !(_loginBlock.classList.contains("active")) ) {
+
+				_pressed.push(e.keyCode);
+				_pressedText.innerHTML = _pressed;
+				checkKonami();
+
+			}
+
+		});
+
+		function checkKonami() {
+
+			var _lastPress = _pressed.length - 1;
+
+			if ( _pressed[_lastPress] === _correct[_lastPress] ) {
+				if ( _pressed.length === _correct.length ) {
+					_checkText.innerHTML = "All Correct !";
+					_pressed = [];
+					_loginBlock.className = "active";
+				} else {
+					_checkText.innerHTML = _pressed.length + ", Correct !";
+				}
+			} else {
+				_checkText.innerHTML = "Wrong ...";
+				_pressed = [];
+				_loginBlock.className = "";
+			}
+
+		}
+
+		// close to reset form value
+		document.getElementById("close").addEventListener("click", function() {
+			_loginBlock.className = "";
+			document.querySelector("input").value = "";
+		});
+
+	</script>
+</body>
+</html>

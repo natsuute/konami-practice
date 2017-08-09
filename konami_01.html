@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Konami Code</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" charset="utf-8"></script>
+</head>
+<body>
+	Reference: <a href="https://stackoverflow.com/questions/6655335/how-can-i-check-with-jquery-if-a-certain-word-is-typed-in-the-browser" target="_blank">How can I check with JQuery, if a certain word is typed in the Browser?</a>
+	<pre>dinner</pre>
+	<pre id="text">Your Typing: </pre>
+	<script type="text/javascript">
+
+		if ( window.addEventListener ) {
+					var kkeys = [], konami = "68,73,78,78,69,82"; //this spells dinner
+					window.addEventListener("keydown", function(e){
+									kkeys.push( e.keyCode );
+									if ( kkeys.toString().indexOf( konami ) >= 0 ) {
+											// run code here
+											$("#text").hide().fadeIn("slow").html('Now the website will appear.');
+									}
+					}, true);
+		}
+
+		// show your typing text
+		if ( window.addEventListener ) {
+		    window.addEventListener("keydown", function(e){
+		        $("#text").append(e.keyCode + " ");
+		    }, true);
+		}
+
+	</script>
+</body>
+</html>
